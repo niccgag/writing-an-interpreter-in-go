@@ -7,12 +7,24 @@ type Token struct {
   Literal string
 }
 
+var keywords = map[string]TokenType {
+  "fn": FUNCTION,
+  "let": LET,
+}
+
+func LookupIdent(ident string) TokenType {
+  if tok, ok := keywords[ident]; ok {
+    return tok
+  }
+  return IDENT
+}
+
 const (
   ILLEGAL = "ILLEGAL"
   EOF = "EOF"
 
   // Identifiers + literals
-  INDENT = "INDENT" // add, forbar, x, y, ...
+  IDENT = "INDENT" // add, forbar, x, y, ...
   INT = "INT" // 1343456
 
   // Operators
